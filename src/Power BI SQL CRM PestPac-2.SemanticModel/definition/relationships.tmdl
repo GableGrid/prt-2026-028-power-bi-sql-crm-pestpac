@@ -1,0 +1,172 @@
+relationship 198ee8b2-2db1-46a3-b323-0c616417df43
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activities.date
+	toColumn: LocalDateTable_22de7ff7-117a-4d87-91e6-d91ce4e1450c.Date
+
+relationship 2ec43bd7-a3e0-44d0-85bf-50b46d2fd655
+	joinOnDateBehavior: datePartOnly
+	fromColumn: branches.opened_date
+	toColumn: LocalDateTable_78f17135-310a-4336-8053-103fc62d08ea.Date
+
+relationship 9175cefe-970f-4c75-b70d-f3f7913726c3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: customers.since_date
+	toColumn: LocalDateTable_04730866-7be0-4f4d-92fb-70b11371d5af.Date
+
+relationship AutoDetected_4cdb5bbf-bad6-4868-951c-0bb6e9925471
+	fromColumn: customers.branch_id
+	toColumn: branches.branch_id
+
+relationship 1c9f3311-57a7-42ce-96cd-0f340f8b6dc4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: deals.close_date
+	toColumn: LocalDateTable_51303d7c-b995-4aff-9785-bca41b390c7a.Date
+
+relationship AutoDetected_1b06b57c-d324-4c27-93d5-0432987487c8
+	fromColumn: activities.deal_id
+	toColumn: deals.deal_id
+
+relationship AutoDetected_5e00baba-99a5-4213-87b7-d5dc67db9973
+	fromColumn: deals.branch_id
+	toColumn: branches.branch_id
+
+relationship cb315bba-eaa9-472c-bc26-972340dec860
+	joinOnDateBehavior: datePartOnly
+	fromColumn: invoices.invoice_date
+	toColumn: LocalDateTable_567ef996-1845-4209-8e7f-4826686cdc16.Date
+
+relationship 88d51f2b-862c-4392-97fb-7aa7030911e7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: invoices.due_date
+	toColumn: LocalDateTable_9838a6ce-4fea-4562-ba7e-08dc3a70b5f3.Date
+
+relationship AutoDetected_4db94397-32e9-410f-a0b9-efc71657727a
+	fromColumn: invoices.customer_id
+	toColumn: customers.customer_id
+
+relationship 21cb5c15-a547-40f8-a409-521471fd9dc9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: job_costs.date
+	toColumn: LocalDateTable_c4efb9e6-72f1-49e8-ad52-6c70e39d6802.Date
+
+relationship AutoDetected_10be5abf-5e64-4098-92b4-d832ce3bf3c3
+	fromColumn: job_costs.order_id
+	toColumn: invoices.order_id
+
+relationship 943c64d3-51be-41f2-84aa-f51f45b7af24
+	joinOnDateBehavior: datePartOnly
+	fromColumn: leads.created_date
+	toColumn: LocalDateTable_ba99a870-1710-4c53-bade-7c9b0f5d6601.Date
+
+relationship AutoDetected_8c7994cb-ba3c-4520-86b6-4cc097b96297
+	fromColumn: leads.branch_id
+	toColumn: branches.branch_id
+
+relationship AutoDetected_0c5b5cb1-9384-40e3-ae63-b804aeeacf46
+	isActive: false
+	fromColumn: deals.lead_id
+	toColumn: leads.lead_id
+
+relationship 186fd590-601d-4621-a085-7f9b75f0a4de
+	joinOnDateBehavior: datePartOnly
+	fromColumn: payments.payment_date
+	toColumn: LocalDateTable_ccff9660-4bc7-4894-8648-05181d698146.Date
+
+relationship AutoDetected_568c247f-f82f-4140-a8f0-d7ab8401e8e0
+	fromColumn: payments.customer_id
+	toColumn: customers.customer_id
+
+relationship AutoDetected_ffe73ebf-3acd-40fc-9cf1-1d31eafdd77b
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: payments.invoice_id
+	toColumn: invoices.invoice_id
+
+relationship b54a7bc7-3fbc-46c9-b6fa-f16c99e269ca
+	joinOnDateBehavior: datePartOnly
+	fromColumn: sales_reps.hire_date
+	toColumn: LocalDateTable_f2d4b7c1-37c1-4dfd-a450-c1243cb98c3e.Date
+
+relationship AutoDetected_b60554e7-a9a3-4784-84a5-a3375c5312ef
+	fromColumn: activities.rep_id
+	toColumn: sales_reps.rep_id
+
+relationship AutoDetected_3af82074-a3f8-4620-99de-08d4e20fc806
+	isActive: false
+	fromColumn: deals.rep_id
+	toColumn: sales_reps.rep_id
+
+relationship AutoDetected_81b10793-d489-402f-99c3-e213f0a401fb
+	isActive: false
+	fromColumn: sales_reps.branch_id
+	toColumn: branches.branch_id
+
+relationship c83c67ef-8e56-4842-85a5-37169f94194f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: schedules.scheduled_date
+	toColumn: LocalDateTable_92ea619d-edab-4c5d-8a8a-02698b2d3660.Date
+
+relationship AutoDetected_dc1f9709-05f2-47ed-a3af-a7461282132b
+	fromColumn: schedules.branch_id
+	toColumn: branches.branch_id
+
+relationship AutoDetected_a24c3d52-eab4-4e58-a071-96da7a663730
+	isActive: false
+	fromColumn: schedules.order_id
+	toColumn: invoices.order_id
+
+relationship cad042f8-ca71-42f9-87c0-fcb119044919
+	joinOnDateBehavior: datePartOnly
+	fromColumn: service_orders.order_date
+	toColumn: LocalDateTable_2b2f90d4-f005-4b87-a4c2-9628b81c223b.Date
+
+relationship bf825be4-48c1-4c00-b3f1-d3e62cfc999d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: service_orders.service_date
+	toColumn: LocalDateTable_6b461365-b37b-4404-961b-e18f793ef0c0.Date
+
+relationship AutoDetected_ba1e1036-7fcd-4e36-9dee-650118c21f1a
+	fromColumn: service_orders.branch_id
+	toColumn: branches.branch_id
+
+relationship AutoDetected_1778544b-1f37-4f50-b06f-d836b7cb9bf6
+	isActive: false
+	fromColumn: service_orders.customer_id
+	toColumn: customers.customer_id
+
+relationship AutoDetected_6eb9dd46-40f0-4dd3-b3f9-0facff660b68
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: service_orders.order_id
+	toColumn: invoices.order_id
+
+relationship AutoDetected_0745b574-8de5-4c4e-a517-acfd8c03add8
+	fromColumn: service_orders.cat_id
+	toColumn: service_categories.cat_id
+
+relationship 6d91ffdb-3040-475d-8219-6f92885d352a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: technicians.hire_date
+	toColumn: LocalDateTable_165f10b6-1665-47bd-bed9-4fdb8ee504fa.Date
+
+relationship AutoDetected_5a90004f-234f-42e4-aace-2961ed7d0be7
+	fromColumn: technicians.branch_id
+	toColumn: branches.branch_id
+
+relationship AutoDetected_f68119fc-0a53-427d-b64a-4bb887f16a4d
+	isActive: false
+	fromColumn: job_costs.tech_id
+	toColumn: technicians.tech_id
+
+relationship AutoDetected_fd8e1a87-8b00-4f78-b2ac-6e8cb098eb4f
+	isActive: false
+	fromColumn: schedules.tech_id
+	toColumn: technicians.tech_id
+
+relationship AutoDetected_99b381ac-7450-4ff7-a5fa-8ed04c9ce6e7
+	isActive: false
+	fromColumn: service_orders.tech_id
+	toColumn: technicians.tech_id
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Power BI SQL CRM PestPac-2"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "375e53e5-8434-4723-9333-6fd9b4a9e60f"
+  }
+}

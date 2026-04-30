@@ -1,0 +1,120 @@
+table service_orders
+	lineageTag: 7ef0d63f-a21a-4661-8d96-241264537c22
+
+	column order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5563d0fc-a0d1-4db0-8b4e-8efa5d9a7d2e
+		summarizeBy: sum
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e699ffc0-f7c7-4a9c-a662-faa1b1c0165a
+		summarizeBy: sum
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column tech_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 890fb9f9-e396-4203-879f-86c44f2d8137
+		summarizeBy: sum
+		sourceColumn: tech_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column branch_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 41b55698-7129-4720-8130-056c2cdd1d15
+		summarizeBy: none
+		sourceColumn: branch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cat_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ec20cd23-005c-4970-94fd-fe488c1a6cae
+		summarizeBy: none
+		sourceColumn: cat_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 17df5853-edce-420e-8c3a-ec261923f17f
+		summarizeBy: none
+		sourceColumn: order_date
+
+		variation Variation
+			isDefault
+			relationship: cad042f8-ca71-42f9-87c0-fcb119044919
+			defaultHierarchy: LocalDateTable_2b2f90d4-f005-4b87-a4c2-9628b81c223b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column service_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1af26b70-6ba2-4cf1-87db-a372a5a356d3
+		summarizeBy: none
+		sourceColumn: service_date
+
+		variation Variation
+			isDefault
+			relationship: bf825be4-48c1-4c00-b3f1-d3e62cfc999d
+			defaultHierarchy: LocalDateTable_6b461365-b37b-4404-961b-e18f793ef0c0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column status
+		dataType: string
+		lineageTag: 5a21a983-ad7a-4642-948e-43a20928105d
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration_hours
+		dataType: double
+		lineageTag: 54b8eb00-61a9-496e-a171-6e5b152e2258
+		summarizeBy: sum
+		sourceColumn: duration_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column amount
+		dataType: double
+		lineageTag: 3639a3e0-6687-4c7b-8e5d-625c3f92b4fc
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition service_orders = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\User\Downloads\phase1_mock_database\phase1_data\service_orders.csv"),[Delimiter=",", Columns=10, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"order_id", Int64.Type}, {"customer_id", Int64.Type}, {"tech_id", Int64.Type}, {"branch_id", Int64.Type}, {"cat_id", Int64.Type}, {"order_date", type date}, {"service_date", type date}, {"status", type text}, {"duration_hours", type number}, {"amount", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,91 @@
+table technicians
+	lineageTag: e2b58a13-9ae8-4517-84ca-9fe86b60d620
+
+	column tech_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7aace95d-c0f1-4059-a1fd-4e8238d05345
+		summarizeBy: sum
+		sourceColumn: tech_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: ab0464be-f948-46b3-ba79-e3de92018acc
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 61c2f673-6c5c-43e4-bd2b-4b0274493ff9
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone
+		dataType: string
+		lineageTag: 7a3939d3-e014-49d0-ae25-93c6de98de18
+		summarizeBy: none
+		sourceColumn: phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column branch_id
+		dataType: int64
+		formatString: 0
+		lineageTag: fbbd979a-ddbc-40ac-8668-eb412d0266be
+		summarizeBy: none
+		sourceColumn: branch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column hire_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6aaadcf0-aada-450f-8327-7484f26c8005
+		summarizeBy: none
+		sourceColumn: hire_date
+
+		variation Variation
+			isDefault
+			relationship: 6d91ffdb-3040-475d-8219-6f92885d352a
+			defaultHierarchy: LocalDateTable_165f10b6-1665-47bd-bed9-4fdb8ee504fa.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column skill
+		dataType: string
+		lineageTag: 171cbc70-344c-4dc6-88e6-29afb9ed48bd
+		summarizeBy: none
+		sourceColumn: skill
+
+		annotation SummarizationSetBy = Automatic
+
+	column hourly_rate
+		dataType: double
+		lineageTag: 7e0cd97d-e157-41c5-a02d-10dea2d895f4
+		summarizeBy: sum
+		sourceColumn: hourly_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition technicians = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\User\Downloads\phase1_mock_database\phase1_data\technicians.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"tech_id", Int64.Type}, {"name", type text}, {"email", type text}, {"phone", type text}, {"branch_id", Int64.Type}, {"hire_date", type date}, {"skill", type text}, {"hourly_rate", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

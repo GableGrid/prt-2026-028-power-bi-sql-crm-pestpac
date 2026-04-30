@@ -1,0 +1,45 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["activities","branches","customers","deals","invoices","job_costs","leads","payments","sales_reps","schedules","service_categories","service_orders","technicians"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table activities
+ref table DateTableTemplate_9069a453-c618-4817-8ecf-50bd31245fb0
+ref table LocalDateTable_22de7ff7-117a-4d87-91e6-d91ce4e1450c
+ref table branches
+ref table LocalDateTable_78f17135-310a-4336-8053-103fc62d08ea
+ref table customers
+ref table LocalDateTable_04730866-7be0-4f4d-92fb-70b11371d5af
+ref table deals
+ref table LocalDateTable_51303d7c-b995-4aff-9785-bca41b390c7a
+ref table invoices
+ref table LocalDateTable_567ef996-1845-4209-8e7f-4826686cdc16
+ref table LocalDateTable_9838a6ce-4fea-4562-ba7e-08dc3a70b5f3
+ref table job_costs
+ref table LocalDateTable_c4efb9e6-72f1-49e8-ad52-6c70e39d6802
+ref table leads
+ref table LocalDateTable_ba99a870-1710-4c53-bade-7c9b0f5d6601
+ref table payments
+ref table LocalDateTable_ccff9660-4bc7-4894-8648-05181d698146
+ref table sales_reps
+ref table LocalDateTable_f2d4b7c1-37c1-4dfd-a450-c1243cb98c3e
+ref table schedules
+ref table LocalDateTable_92ea619d-edab-4c5d-8a8a-02698b2d3660
+ref table service_categories
+ref table service_orders
+ref table LocalDateTable_2b2f90d4-f005-4b87-a4c2-9628b81c223b
+ref table LocalDateTable_6b461365-b37b-4404-961b-e18f793ef0c0
+ref table technicians
+ref table LocalDateTable_165f10b6-1665-47bd-bed9-4fdb8ee504fa
+
+ref cultureInfo en-US
+

@@ -1,0 +1,89 @@
+table leads
+	lineageTag: 57db525b-3c77-4855-ad75-ec2cb971b7b0
+
+	column lead_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e920687-2e1f-442e-a34a-390205850b04
+		summarizeBy: sum
+		sourceColumn: lead_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: b8ab69d0-3935-473d-9beb-1c702ccdfd3a
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 0dc8148b-c90a-42be-99fa-803ef03ab6d6
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone
+		dataType: string
+		lineageTag: 6a567231-4e8a-442a-9b18-e50365bd8a92
+		summarizeBy: none
+		sourceColumn: phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		lineageTag: a530956d-f07a-4d89-b3e9-02a8edef37c9
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: acb13f44-942c-4358-bc1c-511b46e73e16
+		summarizeBy: none
+		sourceColumn: created_date
+
+		variation Variation
+			isDefault
+			relationship: 943c64d3-51be-41f2-84aa-f51f45b7af24
+			defaultHierarchy: LocalDateTable_ba99a870-1710-4c53-bade-7c9b0f5d6601.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column status
+		dataType: string
+		lineageTag: 47925ef0-513e-4bd2-a0d6-670b1342bb9d
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column branch_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0316aea4-8191-43bf-87f7-da625f6b897e
+		summarizeBy: none
+		sourceColumn: branch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition leads = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\User\Downloads\phase1_mock_database\phase1_data\leads.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"lead_id", Int64.Type}, {"name", type text}, {"email", type text}, {"phone", type text}, {"source", type text}, {"created_date", type date}, {"status", type text}, {"branch_id", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

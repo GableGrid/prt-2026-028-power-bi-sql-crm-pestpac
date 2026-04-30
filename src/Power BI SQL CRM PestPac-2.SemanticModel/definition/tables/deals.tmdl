@@ -1,0 +1,85 @@
+table deals
+	lineageTag: fb910938-f796-4dc0-84f2-e5592f63f115
+
+	column deal_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e6fa82ec-885c-4d75-a8a5-42f6c3c74451
+		summarizeBy: none
+		sourceColumn: deal_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column lead_id
+		dataType: int64
+		formatString: 0
+		lineageTag: eadf3c31-2f52-4f82-90cd-946c4d5e3d2c
+		summarizeBy: sum
+		sourceColumn: lead_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column rep_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8b8b03c4-e3f7-41ee-b455-dd2bbb5dbb02
+		summarizeBy: sum
+		sourceColumn: rep_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column close_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e9a59a52-081b-4804-84e8-1a34aa65fbe0
+		summarizeBy: none
+		sourceColumn: close_date
+
+		variation Variation
+			isDefault
+			relationship: 1c9f3311-57a7-42ce-96cd-0f340f8b6dc4
+			defaultHierarchy: LocalDateTable_51303d7c-b995-4aff-9785-bca41b390c7a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column value
+		dataType: double
+		lineageTag: f892004c-004b-4c5a-9668-393c34c67650
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column status
+		dataType: string
+		lineageTag: ebd07080-9f18-4513-9dee-700e845e1f76
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column branch_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b3d77a2-28bb-48c1-8ca5-9048d6c1a4d3
+		summarizeBy: none
+		sourceColumn: branch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition deals = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\User\Downloads\phase1_mock_database\phase1_data\deals.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"deal_id", Int64.Type}, {"lead_id", Int64.Type}, {"rep_id", Int64.Type}, {"close_date", type date}, {"value", type number}, {"status", type text}, {"branch_id", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

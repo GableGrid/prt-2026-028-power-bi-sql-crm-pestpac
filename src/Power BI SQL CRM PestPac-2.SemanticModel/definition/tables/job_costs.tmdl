@@ -1,0 +1,84 @@
+table job_costs
+	lineageTag: c1da195a-56cb-4034-9015-129a5d076036
+
+	column cost_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 33eeebb1-e1b8-4da9-a577-f6d30121fe06
+		summarizeBy: sum
+		sourceColumn: cost_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: bfca8d15-61d4-486f-a064-cb96053b4deb
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column tech_id
+		dataType: int64
+		formatString: 0
+		lineageTag: bb83cb43-ce87-4a8b-ac2c-7dd4fc5a0f59
+		summarizeBy: sum
+		sourceColumn: tech_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cost_type
+		dataType: string
+		lineageTag: e5ffb7be-5c9d-419a-97fb-b551de41d8ee
+		summarizeBy: none
+		sourceColumn: cost_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount
+		dataType: double
+		lineageTag: bc4d3d9c-781b-4895-9ba5-f6105f2ffdb6
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ee56377b-a161-4c49-b47b-ce01a823ca68
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 21cb5c15-a547-40f8-a409-521471fd9dc9
+			defaultHierarchy: LocalDateTable_c4efb9e6-72f1-49e8-ad52-6c70e39d6802.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column description
+		dataType: string
+		lineageTag: 39a5e28a-8ad8-4874-903a-7d58638cd7a9
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition job_costs = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\User\Downloads\phase1_mock_database\phase1_data\job_costs.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"cost_id", Int64.Type}, {"order_id", Int64.Type}, {"tech_id", Int64.Type}, {"cost_type", type text}, {"amount", type number}, {"date", type date}, {"description", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

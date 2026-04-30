@@ -1,0 +1,83 @@
+table activities
+	lineageTag: d2bb754a-593d-4a44-992e-77927d7303a0
+
+	column activity_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 851c5ca0-e5e9-4265-b5d9-33134226cded
+		summarizeBy: sum
+		sourceColumn: activity_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column deal_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 54242fa8-8a24-4941-8337-fa82b22a3d0b
+		summarizeBy: none
+		sourceColumn: deal_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column rep_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e0ebe225-7252-4059-92c8-1faee230b316
+		summarizeBy: none
+		sourceColumn: rep_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column type
+		dataType: string
+		lineageTag: 5da71218-e34c-41d1-b107-670453bdd1b1
+		summarizeBy: none
+		sourceColumn: type
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 11b7c166-1d43-4333-8eb5-ec38c8f8290c
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 198ee8b2-2db1-46a3-b323-0c616417df43
+			defaultHierarchy: LocalDateTable_22de7ff7-117a-4d87-91e6-d91ce4e1450c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column notes
+		dataType: string
+		lineageTag: 22238f60-fc57-438b-84df-5dde93bd2888
+		summarizeBy: none
+		sourceColumn: notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration_min
+		dataType: int64
+		formatString: 0
+		lineageTag: 7675046a-2152-4c77-8e23-292ae685f1e9
+		summarizeBy: sum
+		sourceColumn: duration_min
+
+		annotation SummarizationSetBy = Automatic
+
+	partition activities = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\User\Downloads\phase1_mock_database\phase1_data\activities.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"activity_id", Int64.Type}, {"deal_id", Int64.Type}, {"rep_id", Int64.Type}, {"type", type text}, {"date", type date}, {"notes", type text}, {"duration_min", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

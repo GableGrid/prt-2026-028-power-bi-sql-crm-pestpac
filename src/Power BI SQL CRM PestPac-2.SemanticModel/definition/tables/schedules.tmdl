@@ -1,0 +1,105 @@
+table schedules
+	lineageTag: 3e3989f1-889c-4d12-960c-e136e05b30fa
+
+	column schedule_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ce988f1b-ddd1-47df-a322-310660aba6ef
+		summarizeBy: sum
+		sourceColumn: schedule_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 11e2296e-2d3f-47a4-ad72-4e58f4b22cca
+		summarizeBy: sum
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column tech_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c14527e5-210c-4bc6-99fb-4a14d8ba337e
+		summarizeBy: sum
+		sourceColumn: tech_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column branch_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 21149f6b-6ba0-4684-804f-442f75079b63
+		summarizeBy: none
+		sourceColumn: branch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column scheduled_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f389f4ca-d104-4c74-94eb-37effab7b82c
+		summarizeBy: none
+		sourceColumn: scheduled_date
+
+		variation Variation
+			isDefault
+			relationship: c83c67ef-8e56-4842-85a5-37169f94194f
+			defaultHierarchy: LocalDateTable_92ea619d-edab-4c5d-8a8a-02698b2d3660.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column start_time
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: bacc2cf3-1137-486c-8f35-2103e5ec3b1e
+		summarizeBy: none
+		sourceColumn: start_time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column end_time
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 5a5901c2-a0c6-4163-a6cd-e0a856da7c8e
+		summarizeBy: none
+		sourceColumn: end_time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column status
+		dataType: string
+		lineageTag: 7b0cca2b-fb41-4c83-83a3-836c72cb82b8
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column notes
+		dataType: string
+		lineageTag: 55362c03-b804-4295-9510-4015107976aa
+		summarizeBy: none
+		sourceColumn: notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition schedules = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\User\Downloads\phase1_mock_database\phase1_data\schedules.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"schedule_id", Int64.Type}, {"order_id", Int64.Type}, {"tech_id", Int64.Type}, {"branch_id", Int64.Type}, {"scheduled_date", type date}, {"start_time", type time}, {"end_time", type time}, {"status", type text}, {"notes", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

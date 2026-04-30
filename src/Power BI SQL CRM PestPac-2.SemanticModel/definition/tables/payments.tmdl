@@ -1,0 +1,76 @@
+table payments
+	lineageTag: a5a0313e-cae4-4348-831b-84c7f3ec07b0
+
+	column payment_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ae078f1c-a5db-4c8c-b662-a50e5b13143d
+		summarizeBy: sum
+		sourceColumn: payment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column invoice_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4efb8182-a7c7-4f4d-bfa7-b7dcdcc0eb76
+		summarizeBy: sum
+		sourceColumn: invoice_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e98c7a79-5433-41c9-88ca-42f05e503692
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a39b95af-1f4e-406b-9138-633d13c51573
+		summarizeBy: none
+		sourceColumn: payment_date
+
+		variation Variation
+			isDefault
+			relationship: 186fd590-601d-4621-a085-7f9b75f0a4de
+			defaultHierarchy: LocalDateTable_ccff9660-4bc7-4894-8648-05181d698146.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column amount
+		dataType: double
+		lineageTag: 59379ee6-8787-4eda-9e3b-d5cf044a0c7c
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column method
+		dataType: string
+		lineageTag: 83cf5739-2080-43ed-94c9-0e9f6e89ccfb
+		summarizeBy: none
+		sourceColumn: method
+
+		annotation SummarizationSetBy = Automatic
+
+	partition payments = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\User\Downloads\phase1_mock_database\phase1_data\payments.csv"),[Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"payment_id", Int64.Type}, {"invoice_id", Int64.Type}, {"customer_id", Int64.Type}, {"payment_date", type date}, {"amount", type number}, {"method", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

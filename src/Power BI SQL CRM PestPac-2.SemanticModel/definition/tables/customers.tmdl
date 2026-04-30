@@ -1,0 +1,114 @@
+table customers
+	lineageTag: 1a7a2f19-e1da-4072-aea4-ff0100f197be
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 51ff8b03-384b-4c70-8813-a7eeea8c389d
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: a19394c7-8a97-4d88-b00c-ef7cc8ad9e12
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 0009ef20-c60c-465c-a070-790764b1685d
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone
+		dataType: string
+		lineageTag: a0e9052c-b5f5-43a8-8b9c-afae17702bcc
+		summarizeBy: none
+		sourceColumn: phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column address
+		dataType: string
+		lineageTag: c298113c-dc15-4165-a398-62b4b83fc563
+		summarizeBy: none
+		sourceColumn: address
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 6dda74c3-e733-4b39-8267-3d9e0c50a8c0
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 6da085de-d7b7-4c43-9ab6-e344c30809dd
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip
+		dataType: int64
+		formatString: 0
+		lineageTag: 459a7147-5246-40d2-bcf4-b62d25623f69
+		summarizeBy: sum
+		sourceColumn: zip
+
+		annotation SummarizationSetBy = Automatic
+
+	column branch_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 23a87aa0-51c3-4f33-bbc8-b413ce90599c
+		summarizeBy: none
+		sourceColumn: branch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_type
+		dataType: string
+		lineageTag: de260fd0-b048-4171-9b6f-2b78b638dc80
+		summarizeBy: none
+		sourceColumn: customer_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column since_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8cce8fb5-b951-4b64-9d46-a96f01b747bc
+		summarizeBy: none
+		sourceColumn: since_date
+
+		variation Variation
+			isDefault
+			relationship: 9175cefe-970f-4c75-b70d-f3f7913726c3
+			defaultHierarchy: LocalDateTable_04730866-7be0-4f4d-92fb-70b11371d5af.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition customers = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\User\Downloads\phase1_mock_database\phase1_data\customers.csv"),[Delimiter=",", Columns=11, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"customer_id", Int64.Type}, {"name", type text}, {"email", type text}, {"phone", type text}, {"address", type text}, {"city", type text}, {"state", type text}, {"zip", Int64.Type}, {"branch_id", Int64.Type}, {"customer_type", type text}, {"since_date", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

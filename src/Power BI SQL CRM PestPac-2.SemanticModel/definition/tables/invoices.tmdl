@@ -1,0 +1,92 @@
+table invoices
+	lineageTag: 0bf0b88e-4f74-4786-ad65-3cc4025526a4
+
+	column invoice_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c93fd885-e543-4cd3-9945-06325ceb1014
+		summarizeBy: sum
+		sourceColumn: invoice_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c94bfd8-a564-48fa-a3cc-517c383a78c7
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 9a702225-abfe-40f6-ad6c-e7a5abbe558d
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column invoice_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a39f7302-54d5-48d1-ada6-562c9e0a0c52
+		summarizeBy: none
+		sourceColumn: invoice_date
+
+		variation Variation
+			isDefault
+			relationship: cb315bba-eaa9-472c-bc26-972340dec860
+			defaultHierarchy: LocalDateTable_567ef996-1845-4209-8e7f-4826686cdc16.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column due_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4d3cfeb8-205a-495e-b973-02e937e13986
+		summarizeBy: none
+		sourceColumn: due_date
+
+		variation Variation
+			isDefault
+			relationship: 88d51f2b-862c-4392-97fb-7aa7030911e7
+			defaultHierarchy: LocalDateTable_9838a6ce-4fea-4562-ba7e-08dc3a70b5f3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column amount
+		dataType: double
+		lineageTag: b858e1dc-b0bc-4bcc-919b-d69151020821
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column status
+		dataType: string
+		lineageTag: 29281806-35d9-45cb-a6b6-16da9263abbe
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition invoices = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\User\Downloads\phase1_mock_database\phase1_data\invoices.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"invoice_id", Int64.Type}, {"order_id", Int64.Type}, {"customer_id", Int64.Type}, {"invoice_date", type date}, {"due_date", type date}, {"amount", type number}, {"status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

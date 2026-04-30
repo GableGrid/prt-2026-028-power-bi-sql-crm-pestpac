@@ -1,0 +1,73 @@
+table sales_reps
+	lineageTag: 72abd9f3-3b1f-4389-8e59-4845fc278e5e
+
+	column rep_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 88c65355-75e4-4683-9fa3-91cbad735dd2
+		summarizeBy: none
+		sourceColumn: rep_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: c1ab0708-04bb-4336-be5f-038ab5020a1b
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 17aab9dc-c157-4e03-b90c-4974e9f5a035
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column branch_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 59a57794-4a86-46c5-bf66-92b6da246a30
+		summarizeBy: sum
+		sourceColumn: branch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column hire_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4fc2bc1d-9fc6-4114-8b80-ba70897e10e8
+		summarizeBy: none
+		sourceColumn: hire_date
+
+		variation Variation
+			isDefault
+			relationship: b54a7bc7-3fbc-46c9-b6fa-f16c99e269ca
+			defaultHierarchy: LocalDateTable_f2d4b7c1-37c1-4dfd-a450-c1243cb98c3e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column phone
+		dataType: string
+		lineageTag: d133e2eb-e4ae-4eb5-861b-157f4afd5b20
+		summarizeBy: none
+		sourceColumn: phone
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sales_reps = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\User\Downloads\phase1_mock_database\phase1_data\sales_reps.csv"),[Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"rep_id", Int64.Type}, {"name", type text}, {"email", type text}, {"branch_id", Int64.Type}, {"hire_date", type date}, {"phone", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

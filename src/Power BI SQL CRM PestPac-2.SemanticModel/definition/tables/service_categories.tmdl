@@ -1,0 +1,49 @@
+table service_categories
+	lineageTag: 630e12f0-73c4-4149-afd8-1b0336d1496d
+
+	column cat_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5f9f83b3-894f-4a4f-af62-4b7a9792e140
+		summarizeBy: none
+		sourceColumn: cat_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 72f42375-140d-475d-bad5-de4794ef0ff9
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: 30583bd6-01cf-4251-8998-c937f7ed3ea3
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column base_price
+		dataType: int64
+		formatString: 0
+		lineageTag: 63d125c9-4fd0-4cc3-958d-678f4f5b4ed7
+		summarizeBy: none
+		sourceColumn: base_price
+
+		annotation SummarizationSetBy = Automatic
+
+	partition service_categories = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\User\Downloads\phase1_mock_database\phase1_data\service_categories.csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"cat_id", Int64.Type}, {"name", type text}, {"description", type text}, {"base_price", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
