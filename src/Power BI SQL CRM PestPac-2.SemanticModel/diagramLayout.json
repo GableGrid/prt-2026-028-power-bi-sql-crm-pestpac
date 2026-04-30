@@ -1,0 +1,191 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 623.589472,
+        "y": 278.135077
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 179.58630201148844,
+            "y": 1306.0072934300863
+          },
+          "nodeIndex": "activities",
+          "nodeLineageTag": "d2bb754a-593d-4a44-992e-77927d7303a0",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 933.86976309916236,
+            "y": 0
+          },
+          "nodeIndex": "branches",
+          "nodeLineageTag": "a5220ff9-a601-4d4f-9575-b7c7fd2f52e4",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 929.67621503965256,
+            "y": 429.78956245643354
+          },
+          "nodeIndex": "customers",
+          "nodeLineageTag": "1a7a2f19-e1da-4072-aea4-ff0100f197be",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 539.67748912694549,
+            "y": 837.34226644549233
+          },
+          "nodeIndex": "deals",
+          "nodeLineageTag": "fb910938-f796-4dc0-84f2-e5592f63f115",
+          "size": {
+            "height": 261.36133354786818,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 753.39766677466616,
+            "y": 1312.7190550319121
+          },
+          "nodeIndex": "invoices",
+          "nodeLineageTag": "0bf0b88e-4f74-4786-ad65-3cc4025526a4",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1385.1249111290244,
+            "y": 1318.0802249431197
+          },
+          "nodeIndex": "job_costs",
+          "nodeLineageTag": "c1da195a-56cb-4034-9015-129a5d076036",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 438.28149150909451,
+            "y": 399.04981274334074
+          },
+          "nodeIndex": "leads",
+          "nodeLineageTag": "57db525b-3c77-4855-ad75-ec2cb971b7b0",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1095.6784108649576,
+            "y": 1671.6819942964851
+          },
+          "nodeIndex": "payments",
+          "nodeLineageTag": "a5a0313e-cae4-4348-831b-84c7f3ec07b0",
+          "size": {
+            "height": 270.76466741753939,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 6.680666773934206,
+            "y": 263.18088478220784
+          },
+          "nodeIndex": "sales_reps",
+          "nodeLineageTag": "72abd9f3-3b1f-4389-8e59-4845fc278e5e",
+          "size": {
+            "height": 245.258732,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1914.6159289225598,
+            "y": 1277.7804648967874
+          },
+          "nodeIndex": "schedules",
+          "nodeLineageTag": "3e3989f1-889c-4d12-960c-e136e05b30fa",
+          "size": {
+            "height": 313.81511139715803,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 1389.5786889783135,
+            "y": 372.231973986466
+          },
+          "nodeIndex": "service_categories",
+          "nodeLineageTag": "630e12f0-73c4-4149-afd8-1b0336d1496d",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1190.9947489524909,
+            "y": 841.841798731691
+          },
+          "nodeIndex": "service_orders",
+          "nodeLineageTag": "7ef0d63f-a21a-4661-8d96-241264537c22",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 1825.5377579245931,
+            "y": 214.81073221875565
+          },
+          "nodeIndex": "technicians",
+          "nodeLineageTag": "e2b58a13-9ae8-4517-84ca-9fe86b60d620",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 11
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 56.447393005377741,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}
