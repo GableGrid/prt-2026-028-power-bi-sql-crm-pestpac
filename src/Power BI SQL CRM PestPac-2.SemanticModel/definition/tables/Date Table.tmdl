@@ -1,0 +1,84 @@
+table 'Date Table'
+	lineageTag: dbfc845f-c211-4257-a8bf-4ab6f82a7857
+
+	column Date
+		formatString: General Date
+		lineageTag: 49cce644-9b18-47e8-a3e6-4db8c2af4208
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 6c34d6e4-17a0-48f2-b447-4af5e09d01d9
+			defaultHierarchy: LocalDateTable_b874d31d-e2ce-4f9f-9ddf-18748dd6b5c8.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: a647ac16-b468-4ab3-ad04-9d18f459934c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		formatString: 0
+		lineageTag: 7fc9813c-88da-49a7-8965-ec2033267c23
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		lineageTag: 27979046-4587-463e-971e-5bde3611d196
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		lineageTag: 3744efc1-377c-4836-8cef-ce6983831422
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Week
+		formatString: 0
+		lineageTag: cce8675b-b7bb-41c1-a7a4-88443c3b5064
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Week]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week'
+		lineageTag: 4f3beaa5-b537-4712-bcef-34179fc387ac
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Day of Week]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Date Table' = calculated
+		mode: import
+		source =
+				
+				ADDCOLUMNS(
+				  CALENDAR(DATE(2024,1,1), DATE(2024,12,31)),
+				  "Year", YEAR([Date]),
+				  "Month", MONTH([Date]),
+				  "Month Name", FORMAT([Date], "MMMM"),
+				  "Quarter", "Q" & QUARTER([Date]),
+				  "Week", WEEKNUM([Date]),
+				  "Day of Week", FORMAT([Date], "dddd")
+				)
+
+	annotation PBI_Id = 155ef4781a7743239ae034fdb8bcfc50
+

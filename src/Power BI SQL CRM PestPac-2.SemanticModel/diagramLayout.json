@@ -4,8 +4,8 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 623.589472,
-        "y": 278.135077
+        "x": 0,
+        "y": 364.76017567723261
       },
       "nodes": [
         {
@@ -16,7 +16,7 @@
           "nodeIndex": "activities",
           "nodeLineageTag": "d2bb754a-593d-4a44-992e-77927d7303a0",
           "size": {
-            "height": 248,
+            "height": 276.14967798023281,
             "width": 234
           },
           "zIndex": 1
@@ -49,7 +49,7 @@
         },
         {
           "location": {
-            "x": 539.67748912694549,
+            "x": 796.54330069657033,
             "y": 837.34226644549233
           },
           "nodeIndex": "deals",
@@ -62,26 +62,26 @@
         },
         {
           "location": {
-            "x": 753.39766677466616,
-            "y": 1312.7190550319121
+            "x": 616.167986621031,
+            "y": 1298.6442160417957
           },
           "nodeIndex": "invoices",
           "nodeLineageTag": "0bf0b88e-4f74-4786-ad65-3cc4025526a4",
           "size": {
-            "height": 248,
+            "height": 283.187097475291,
             "width": 234
           },
           "zIndex": 4
         },
         {
           "location": {
-            "x": 1385.1249111290244,
-            "y": 1318.0802249431197
+            "x": 1290.1197479457385,
+            "y": 1296.9679664579451
           },
           "nodeIndex": "job_costs",
           "nodeLineageTag": "c1da195a-56cb-4034-9015-129a5d076036",
           "size": {
-            "height": 248,
+            "height": 300.78064621293652,
             "width": 234
           },
           "zIndex": 5
@@ -101,8 +101,8 @@
         },
         {
           "location": {
-            "x": 1095.6784108649576,
-            "y": 1671.6819942964851
+            "x": 919.74292348850236,
+            "y": 1692.7942527816597
           },
           "nodeIndex": "payments",
           "nodeLineageTag": "a5a0313e-cae4-4348-831b-84c7f3ec07b0",
@@ -127,8 +127,8 @@
         },
         {
           "location": {
-            "x": 1914.6159289225598,
-            "y": 1277.7804648967874
+            "x": 1840.7230242244484,
+            "y": 1281.2991746443163
           },
           "nodeIndex": "schedules",
           "nodeLineageTag": "3e3989f1-889c-4d12-960c-e136e05b30fa",
@@ -153,8 +153,8 @@
         },
         {
           "location": {
-            "x": 1190.9947489524909,
-            "y": 841.841798731691
+            "x": 1518.234755472698,
+            "y": 845.36050847922013
           },
           "nodeIndex": "service_orders",
           "nodeLineageTag": "7ef0d63f-a21a-4661-8d96-241264537c22",
@@ -176,10 +176,23 @@
             "width": 234
           },
           "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 152.43901867932709,
+            "y": 839.90407266197985
+          },
+          "nodeIndex": "Date Table",
+          "nodeLineageTag": "dbfc845f-c211-4257-a8bf-4ab6f82a7857",
+          "size": {
+            "height": 287.87599454818815,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",
-      "zoomValue": 56.447393005377741,
+      "zoomValue": 28.419508051274068,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,

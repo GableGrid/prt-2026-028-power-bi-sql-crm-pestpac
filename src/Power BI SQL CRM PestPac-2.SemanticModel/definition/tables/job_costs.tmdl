@@ -1,6 +1,15 @@
 table job_costs
 	lineageTag: c1da195a-56cb-4034-9015-129a5d076036
 
+	measure 'Total Job Cost' = ```
+			
+			SUM(job_costs[amount])
+			
+			```
+		lineageTag: 54c9519f-9202-4d7e-a328-5238760834d7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column cost_id
 		dataType: int64
 		formatString: 0

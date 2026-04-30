@@ -1,6 +1,183 @@
 table service_orders
 	lineageTag: 7ef0d63f-a21a-4661-8d96-241264537c22
 
+	measure 'Total Service Revenue' = ```
+			
+			SUM(service_orders[amount])
+			
+			```
+		lineageTag: 9fd94cc3-4577-4096-8805-09fe27e9d1ae
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Gross Profit' = ```
+			
+			[Total Service Revenue] - [Total Job Cost]
+			
+			```
+		lineageTag: a1b24ea3-d849-4d5e-a404-e83daf418d82
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Gross Margin %' =
+			
+			DIVIDE(
+			  [Gross Profit],
+			  [Total Service Revenue],
+			  0
+			) * 100
+		lineageTag: 2cd993b4-b901-45f8-8496-0780912211c3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Dollar per Hour' =
+			
+			DIVIDE(
+			  [Total Service Revenue],
+			  SUM(
+			    service_orders[duration_hours]),
+			  0
+			)
+		lineageTag: bb7a16fe-849b-43dd-8c7f-7a30d81ed8df
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Job Cost per Order' =
+			
+			DIVIDE(
+			  [Total Job Cost],
+			  COUNTROWS(service_orders),
+			  0
+			)
+		lineageTag: 9a8fa6cc-e19c-434b-9de2-c13e7de6769c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue per TechnicianRevenue per Technician' =
+			
+			DIVIDE(
+			  [Total Service Revenue],
+			  DISTINCTCOUNT(
+			    service_orders[tech_id]),
+			  0
+			)
+		lineageTag: 1746d43f-66e7-4aa6-a8f8-e6ae6df185ff
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue per Branch' =
+			
+			DIVIDE(
+			  [Total Service Revenue],
+			  DISTINCTCOUNT(
+			    service_orders[branch_id]),
+			  0
+			)
+		lineageTag: b5a24869-b04d-4185-b459-08a2681d5360
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Completed Orders' =
+			
+			CALCULATE(
+			  COUNTROWS(service_orders),
+			  service_orders[status]
+			    = "Completed"
+			)
+		formatString: 0
+		lineageTag: 62c7a2b9-8607-497c-8cd6-0f94443a2d99
+
+	measure 'Cancellation Rate %' =
+			
+			DIVIDE(
+			  CALCULATE(
+			    COUNTROWS(service_orders),
+			    service_orders[status]
+			      = "Cancelled"),
+			  COUNTROWS(service_orders), 0
+			) * 100
+		lineageTag: a029d61e-620c-4774-8d0b-b2e51d3b78a4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue MTD' =
+			
+			CALCULATE(
+			  [Total Service Revenue],
+			  DATESMTD(
+			    service_orders[service_date])
+			)
+		lineageTag: 5871fefa-2ee7-432e-9e11-0cffc728db40
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue QTD' =
+			
+			CALCULATE(
+			  [Total Service Revenue],
+			  DATESQTD(
+			    service_orders[service_date])
+			)
+		lineageTag: 8ebe250a-e150-49b7-9717-5715ef7b6811
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue YTD' =
+			
+			CALCULATE(
+			  [Total Service Revenue],
+			  DATESYTD(
+			    service_orders[service_date])
+			)
+		lineageTag: 4b72b4d3-5a5f-4139-864e-d3f247881777
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue Previous Month' =
+			
+			CALCULATE(
+			  [Total Service Revenue],
+			  PREVIOUSMONTH(
+			    service_orders[service_date])
+			)
+		lineageTag: 7e3b52ae-747c-4310-beac-6ad4d3ac3888
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MoM Growth %' =
+			
+			DIVIDE(
+			  [Total Service Revenue] -
+			  [Revenue Previous Month],
+			  [Revenue Previous Month],
+			  0) * 100
+		lineageTag: b6262bc8-f4ff-4f7c-93f7-60c2a34809ab
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue Same Period LY' =
+			
+			CALCULATE(
+			  [Total Service Revenue],
+			  SAMEPERIODLASTYEAR(
+			    service_orders[service_date])
+			)
+		lineageTag: 23844ccc-2a7d-4c2c-9e62-9f437cdb824c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YoY Growth %' =
+			
+			DIVIDE(
+			  [Total Service Revenue] -
+			  [Revenue Same Period LY],
+			  [Revenue Same Period LY],
+			  0
+			) * 100
+		lineageTag: b04866f3-b89a-4688-94c4-31aa521de6ed
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column order_id
 		dataType: int64
 		formatString: 0
@@ -68,11 +245,6 @@ table service_orders
 		lineageTag: 1af26b70-6ba2-4cf1-87db-a372a5a356d3
 		summarizeBy: none
 		sourceColumn: service_date
-
-		variation Variation
-			isDefault
-			relationship: bf825be4-48c1-4c00-b3f1-d3e62cfc999d
-			defaultHierarchy: LocalDateTable_6b461365-b37b-4404-961b-e18f793ef0c0.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 

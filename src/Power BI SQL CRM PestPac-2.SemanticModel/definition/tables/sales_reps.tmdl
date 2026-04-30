@@ -1,6 +1,16 @@
 table sales_reps
 	lineageTag: 72abd9f3-3b1f-4389-8e59-4845fc278e5e
 
+	measure 'Top Salesperson RevenueTop Salesperson Revenue' =
+			
+			MAXX(
+			  VALUES(sales_reps[name]),
+			  CALCULATE(SUM(deals[value]))
+			)
+		lineageTag: f0bea08f-4bf7-4745-ae22-41d572910c03
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column rep_id
 		dataType: int64
 		formatString: 0

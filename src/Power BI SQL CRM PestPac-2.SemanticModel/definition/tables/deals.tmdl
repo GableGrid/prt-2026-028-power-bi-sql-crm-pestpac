@@ -1,6 +1,79 @@
 table deals
 	lineageTag: fb910938-f796-4dc0-84f2-e5592f63f115
 
+	measure 'Total Revenue' = SUM(deals[value])
+		lineageTag: 58bf2531-ee8e-40ff-8d06-80fe1dcca92f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Closed Won Deals' = ```
+			
+			CALCULATE(
+			  COUNTROWS(deals),
+			  deals[status] = "Closed Won"
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 0a7be47b-46ad-45e4-ae7c-439dc8849a73
+
+	measure 'Closed Lost Deals' = ```
+			
+			CALCULATE(
+			  COUNTROWS(deals),
+			  deals[status] = "Closed Lost"
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 18c40fb4-11f4-4233-ae3d-b1f808dde569
+
+	measure 'Lead to Close Rate %' =
+			
+			DIVIDE(  [Closed Won Deals],
+			  COUNTROWS(leads), 0
+			) * 100
+		lineageTag: 6ac9043e-8c8b-46ff-b819-c5960cf1177d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Leads Created' = COUNTROWS(leads)
+		formatString: 0
+		lineageTag: 43ffb4c3-8f6b-42d9-a46b-812f5113a05c
+
+	measure 'Avg Deal Value' =
+			
+			AVERAGEX(
+			  FILTER(deals,
+			    deals[status]="Closed Won"),
+			  deals[value]
+			)
+		lineageTag: 11d5a535-5846-4e80-b6b4-8bc7ba29ca5a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sales Revenue MTD' =
+			
+			CALCULATE(
+			  SUM(deals[value]),
+			  deals[status]="Closed Won",
+			  DATESMTD(deals[close_date])
+			)
+		lineageTag: 4a523481-b60d-45ba-9e2d-e3e3923db602
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sales Revenue YTD' =
+			
+			CALCULATE(
+			  SUM(deals[value]),
+			  deals[status]="Closed Won",
+			  DATESYTD(deals[close_date])
+			)
+		lineageTag: 791af385-b0a9-4cd1-837a-0ee6df9d87a2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column deal_id
 		dataType: int64
 		formatString: 0
@@ -34,11 +107,6 @@ table deals
 		lineageTag: e9a59a52-081b-4804-84e8-1a34aa65fbe0
 		summarizeBy: none
 		sourceColumn: close_date
-
-		variation Variation
-			isDefault
-			relationship: 1c9f3311-57a7-42ce-96cd-0f340f8b6dc4
-			defaultHierarchy: LocalDateTable_51303d7c-b995-4aff-9785-bca41b390c7a.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 

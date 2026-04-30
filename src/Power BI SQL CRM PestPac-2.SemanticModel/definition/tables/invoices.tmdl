@@ -1,6 +1,31 @@
 table invoices
 	lineageTag: 0bf0b88e-4f74-4786-ad65-3cc4025526a4
 
+	measure 'Open Invoices Count' = ```
+			
+			CALCULATE(
+			  COUNTROWS(invoices),
+			  invoices[status] IN
+			    {"Unpaid", "Overdue"}
+			)
+			
+			```
+		formatString: 0
+		lineageTag: c81f2e3c-4e86-4ce3-bc28-f662a901c845
+
+	measure 'Open Invoices Amount' = ```
+			
+			CALCULATE(
+			  SUM(invoices[amount]),
+			  invoices[status] IN
+			    {"Unpaid", "Overdue"}
+			)
+			
+			```
+		lineageTag: 41386026-8ea1-4bdc-a30a-3da6783079b6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column invoice_id
 		dataType: int64
 		formatString: 0

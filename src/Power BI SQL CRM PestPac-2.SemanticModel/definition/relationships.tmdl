@@ -17,11 +17,6 @@ relationship AutoDetected_4cdb5bbf-bad6-4868-951c-0bb6e9925471
 	fromColumn: customers.branch_id
 	toColumn: branches.branch_id
 
-relationship 1c9f3311-57a7-42ce-96cd-0f340f8b6dc4
-	joinOnDateBehavior: datePartOnly
-	fromColumn: deals.close_date
-	toColumn: LocalDateTable_51303d7c-b995-4aff-9785-bca41b390c7a.Date
-
 relationship AutoDetected_1b06b57c-d324-4c27-93d5-0432987487c8
 	fromColumn: activities.deal_id
 	toColumn: deals.deal_id
@@ -121,11 +116,6 @@ relationship cad042f8-ca71-42f9-87c0-fcb119044919
 	fromColumn: service_orders.order_date
 	toColumn: LocalDateTable_2b2f90d4-f005-4b87-a4c2-9628b81c223b.Date
 
-relationship bf825be4-48c1-4c00-b3f1-d3e62cfc999d
-	joinOnDateBehavior: datePartOnly
-	fromColumn: service_orders.service_date
-	toColumn: LocalDateTable_6b461365-b37b-4404-961b-e18f793ef0c0.Date
-
 relationship AutoDetected_ba1e1036-7fcd-4e36-9dee-650118c21f1a
 	fromColumn: service_orders.branch_id
 	toColumn: branches.branch_id
@@ -169,4 +159,17 @@ relationship AutoDetected_99b381ac-7450-4ff7-a5fa-8ed04c9ce6e7
 	isActive: false
 	fromColumn: service_orders.tech_id
 	toColumn: technicians.tech_id
+
+relationship 6c34d6e4-17a0-48f2-b447-4af5e09d01d9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Date Table'.Date
+	toColumn: LocalDateTable_b874d31d-e2ce-4f9f-9ddf-18748dd6b5c8.Date
+
+relationship e7ee2fe4-3b47-297f-7d40-5fb8c932ee38
+	fromColumn: service_orders.service_date
+	toColumn: 'Date Table'.Date
+
+relationship 37f7a594-5755-9fc6-05e7-e33b0172a44a
+	fromColumn: deals.close_date
+	toColumn: 'Date Table'.Date
 
