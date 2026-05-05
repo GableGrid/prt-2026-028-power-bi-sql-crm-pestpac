@@ -22,9 +22,10 @@ table invoices
 			)
 			
 			```
+		formatString: 0
 		lineageTag: 41386026-8ea1-4bdc-a30a-3da6783079b6
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"isDecimal":true}
 
 	column invoice_id
 		dataType: int64

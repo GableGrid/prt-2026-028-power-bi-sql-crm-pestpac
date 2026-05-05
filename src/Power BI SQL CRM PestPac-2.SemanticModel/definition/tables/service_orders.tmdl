@@ -15,9 +15,10 @@ table service_orders
 			[Total Service Revenue] - [Total Job Cost]
 			
 			```
+		formatString: 0
 		lineageTag: a1b24ea3-d849-4d5e-a404-e83daf418d82
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"isDecimal":true}
 
 	measure 'Gross Margin %' =
 			
@@ -26,21 +27,22 @@ table service_orders
 			  [Total Service Revenue],
 			  0
 			) * 100
+		formatString: 0
 		lineageTag: 2cd993b4-b901-45f8-8496-0780912211c3
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"isDecimal":true}
 
 	measure 'Dollar per Hour' =
 			
 			DIVIDE(
 			  [Total Service Revenue],
 			  SUM(
-			    service_orders[duration_hours]),
-			  0
+			    service_orders[duration_hours]),0
 			)
+		formatString: 0
 		lineageTag: bb7a16fe-849b-43dd-8c7f-7a30d81ed8df
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"isDecimal":true}
 
 	measure 'Avg Job Cost per Order' =
 			
